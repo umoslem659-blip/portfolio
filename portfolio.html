@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Moslemuddin — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F6F8;
+    --panel:#FFFFFF;
+    --ink:#131B2E;
+    --muted:#5C6478;
+    --line:#DCE0E6;
+    --accent:#B96E24;      /* brass/amber — credential, seal */
+    --accent-2:#2F6F5E;    /* deep teal — systems/security */
+    --accent-2-soft:#E4F0EC;
+    --accent-soft:#F4E7D8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 32px;}
+  h1,h2,h3{font-family:'Source Serif 4', Georgia, serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  /* ---------- Header / nav ---------- */
+  header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(245,246,248,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex; justify-content:space-between; align-items:center; height:64px;}
+  .logo{font-family:'Source Serif 4', serif; font-weight:700; font-size:1.05rem;}
+  .logo span{color:var(--accent);}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{
+    text-decoration:none; font-size:0.88rem; color:var(--muted);
+    font-weight:500; transition:color .15s;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:96px 0 72px; border-bottom:1px solid var(--line);}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:0.76rem;
+    color:var(--accent-2); background:var(--accent-2-soft);
+    padding:5px 12px; border-radius:20px; margin-bottom:22px;
+    letter-spacing:0.02em;
+  }
+  .eyebrow::before{content:"●"; font-size:0.6rem;}
+  .hero h1{font-size:2.6rem; line-height:1.15; max-width:15ch; margin-bottom:20px;}
+  .hero p.lede{font-size:1.08rem; color:var(--muted); max-width:56ch; margin-bottom:32px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:11px 22px; border-radius:6px;
+    font-size:0.88rem; font-weight:500; text-decoration:none;
+    border:1px solid transparent; transition:all .15s;
+  }
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{background:#2a3550;}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:36px;}
+  .section-num{font-family:'JetBrains Mono', monospace; color:var(--muted); font-size:0.85rem;}
+  .section-head h2{font-size:1.5rem;}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  .about-grid p{color:var(--muted); margin-bottom:16px; max-width:56ch;}
+  .fact-list{list-style:none; display:flex; flex-direction:column; gap:14px;}
+  .fact-list li{
+    font-size:0.86rem; padding-bottom:14px; border-bottom:1px dashed var(--line);
+  }
+  .fact-list .fact-label{
+    display:block; font-family:'JetBrains Mono', monospace; color:var(--accent);
+    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:3px;
+  }
+
+  /* ---------- Research (numbered — real sequence: an index of papers) ---------- */
+  .paper{
+    display:grid; grid-template-columns:56px 1fr; gap:20px;
+    padding:24px 0; border-top:1px solid var(--line);
+  }
+  .paper:first-of-type{border-top:none;}
+  .paper-index{font-family:'JetBrains Mono', monospace; color:var(--line); font-size:1.4rem; font-weight:500;}
+  .paper h3{font-size:1.08rem; margin-bottom:6px;}
+  .paper .target{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--accent-2);
+    background:var(--accent-2-soft); padding:3px 9px; border-radius:4px; margin-left:10px;
+    vertical-align:middle;
+  }
+  .paper p{color:var(--muted); font-size:0.92rem; max-width:64ch;}
+  .paper .status{
+    display:inline-block; margin-top:10px; font-size:0.78rem; color:var(--accent);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- Projects ---------- */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:26px; display:flex; flex-direction:column; gap:12px;
+  }
+  .card h3{font-size:1.05rem;}
+  .card p{color:var(--muted); font-size:0.9rem; flex-grow:1;}
+  .tags{display:flex; flex-wrap:wrap; gap:7px;}
+  .tag{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--ink);
+    background:var(--accent-soft); border:1px solid var(--line);
+    padding:3px 9px; border-radius:4px;
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .skill-col h3{
+    font-size:0.78rem; font-family:'JetBrains Mono', monospace; text-transform:uppercase;
+    letter-spacing:0.04em; color:var(--accent-2); margin-bottom:14px; font-weight:500;
+  }
+  .skill-col ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .skill-col li{font-size:0.92rem; color:var(--ink); padding-left:14px; position:relative;}
+  .skill-col li::before{
+    content:""; position:absolute; left:0; top:9px; width:5px; height:5px;
+    background:var(--accent); border-radius:50%;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{border-bottom:none;}
+  .contact-box{
+    background:var(--ink); color:#fff; border-radius:12px; padding:48px;
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .contact-box h2{color:#fff; font-size:1.7rem; max-width:16ch;}
+  .contact-links{display:flex; flex-direction:column; gap:10px;}
+  .contact-links a{
+    text-decoration:none; font-size:0.95rem; display:flex; align-items:center; gap:8px;
+    color:#E9EAF0; transition:color .15s;
+  }
+  .contact-links a:hover{color:var(--accent);}
+  footer{text-align:center; padding:28px 0; color:var(--muted); font-size:0.8rem;}
+
+  @media (max-width:720px){
+    .hero h1{font-size:2rem;}
+    .about-grid, .proj-grid, .skills-grid{grid-template-columns:1fr;}
+    nav ul{gap:16px;}
+    .contact-box{flex-direction:column; align-items:flex-start;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">Moslemuddin<span>.</span></div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <span class="eyebrow">CSE student · Northern University Bangladesh</span>
+  <h1>Md Moslemuddin</h1>
+  <p class="lede">
+    I build software systems and write research on privacy and security in the platforms
+    people use every day — mobile financial services, social media, and the apps in between.
+  </p>
+  <div class="hero-actions">
+    <a href="#research" class="btn btn-primary">View research</a>
+    <a href="#projects" class="btn btn-ghost">View projects</a>
+  </div>
+</section>
+
+<section id="about" class="wrap">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>About</h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>
+        I'm a Computer Science and Engineering student at Northern University Bangladesh,
+        working across AI/ML, systems programming, and applied research. My coursework spans
+        Java object-oriented design, machine learning fundamentals, and computer architecture —
+        and outside of class, I write research papers on how privacy and security actually hold
+        up (or don't) in widely used consumer platforms in Bangladesh.
+      </p>
+      <p>
+        My work tends to sit at the intersection of building and studying: implementing a
+        working system, then asking what could go wrong with it for real users.
+      </p>
+    </div>
+    <ul class="fact-list">
+      <li><span class="fact-label">Institution</span>Northern University Bangladesh</li>
+      <li><span class="fact-label">Field</span>Computer Science &amp; Engineering</li>
+      <li><span class="fact-label">Focus areas</span>AI/ML, applied security &amp; privacy research, systems design</li>
+      <li><span class="fact-label">Languages</span>Bengali, English</li>
+    </ul>
+  </div>
+</section>
+
+<section id="research" class="wrap">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Research</h2>
+  </div>
+
+  <div class="paper">
+    <span class="paper-index">01</span>
+    <div>
+      <h3>MFS Payment Confirmation: Security &amp; Privacy Practices <span class="target">SOUPS-targeted</span></h3>
+      <p>Examines how mobile financial service platforms such as bKash and Nagad confirm
+        payments, and the security and privacy gaps in that confirmation flow in the
+        Bangladeshi context.</p>
+      <span class="status">In progress</span>
+    </div>
+  </div>
+
+  <div class="paper">
+    <span class="paper-index">02</span>
+    <div>
+      <h3>A Photo Download Notification System for Facebook</h3>
+      <p>Proposes a notification mechanism that alerts users when their photos are
+        downloaded on Facebook, addressing a gap in platform-level photo privacy controls.</p>
+      <span class="status">Journal-targeted</span>
+    </div>
+  </div>
+
+  <div class="paper">
+    <span class="paper-index">03</span>
+    <div>
+      <h3>Predictive Modeling of Privacy Breach Risk in Social Media Image Sharing</h3>
+      <p>Builds a predictive model to estimate the likelihood of privacy breach when
+        images are shared on social media platforms.</p>
+      <span class="status">Journal-targeted</span>
+    </div>
+  </div>
+
+  <div class="paper">
+    <span class="paper-index">04</span>
+    <div>
+      <h3>Mobile Phone Usage Among Children in Bangladesh</h3>
+      <p>A study of mobile phone usage patterns among children in Bangladesh and their
+        implications, prepared for journal submission.</p>
+      <span class="status">Journal-targeted</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Projects</h2>
+  </div>
+  <div class="proj-grid">
+    <div class="card">
+      <h3>bKash Wrong-Number Transfer Recovery</h3>
+      <p>An escrow-based system for recovering mobile financial service transfers sent
+        to the wrong number, with modules for reversal handling and dispute management
+        backed by a relational schema.</p>
+      <div class="tags">
+        <span class="tag">Java</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Escrow design</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>সহায়ক — Anonymous Mental Health Support</h3>
+      <p>A React-based application offering anonymous mental health support with
+        bilingual Bengali/English interaction, powered by the Claude API.</p>
+      <div class="tags">
+        <span class="tag">React</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">Bengali/English</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>KNN Classifier — Iris Dataset</h3>
+      <p>Implementation and evaluation of a K-Nearest Neighbors classifier on the Iris
+        dataset as part of AI/ML coursework, with a full written report.</p>
+      <div class="tags">
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>A* Search Algorithm</h3>
+      <p>Implementation of the A* pathfinding algorithm, exploring heuristic-driven
+        search for optimal path solutions.</p>
+      <div class="tags">
+        <span class="tag">Algorithms</span>
+        <span class="tag">AI Search</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>Skills</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-col">
+      <h3>Languages &amp; Tools</h3>
+      <ul>
+        <li>Java (OOP)</li>
+        <li>Python</li>
+        <li>MySQL</li>
+        <li>React</li>
+      </ul>
+    </div>
+    <div class="skill-col">
+      <h3>AI / ML</h3>
+      <ul>
+        <li>Naive Bayes</li>
+        <li>KNN</li>
+        <li>Genetic Algorithms</li>
+        <li>Hill Climbing &amp; Simulated Annealing</li>
+        <li>Constraint Satisfaction Problems</li>
+      </ul>
+    </div>
+    <div class="skill-col">
+      <h3>Research</h3>
+      <ul>
+        <li>Privacy &amp; security analysis</li>
+        <li>Academic writing (journal/conference format)</li>
+        <li>Predictive modeling</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact wrap">
+  <div class="contact-box">
+    <h2>Let's work together.</h2>
+    <div class="contact-links">
+      <a href="mailto:your.email@example.com">your.email@example.com</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">linkedin.com/in/yourusername</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Md Moslemuddin. Built with care.
+</footer>
+
+</body>
+</html>
